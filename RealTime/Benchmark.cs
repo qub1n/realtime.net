@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 
 namespace RealTime
 {
+    [MemoryDiagnoser]
     public class Benchmark
     {
 
