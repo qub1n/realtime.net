@@ -1,6 +1,5 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
+﻿using BenchmarkDotNet.Running;
+using System;
 
 namespace RealTime
 {
@@ -8,7 +7,10 @@ namespace RealTime
     {
         static void Main(string[] args)
         {
-            var summary = BenchmarkRunner.Run<Benchmark>();
+            var summary = BenchmarkRunner.Run<Benchmark>();            
+
+            //Console.WriteLine(new Benchmark().Realitme());
+            //Console.WriteLine(new Benchmark().NonRealitme());
         }
     }
 }

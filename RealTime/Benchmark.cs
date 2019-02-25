@@ -1,10 +1,13 @@
 ﻿using System;
 using BenchmarkDotNet.Attributes;
 using System.Security.Cryptography;
+using System.Linq;
 
 namespace RealTime
 {
+    [HtmlExporter]
     [MemoryDiagnoser]
+    //[AllStatisticsColumn]
     public class Benchmark
     {
 
@@ -15,13 +18,13 @@ namespace RealTime
 
         public Benchmark()
         {
-            _data = "dog;cat";
+            _data = string.Concat(Enumerable.Repeat("dog,cat,spider,cat,bird,", 1000));
         }
 
         [Benchmark]
-        public int Realitme() => realitme.GetValue(_data);
+        public int Realitme() => realitme.NumberOfLegs(_data);
 
         [Benchmark]
-        public int NonRealitme() => nonrealitme.GetValue(_data);
+        public int NonRealitme() => nonrealitme.NumberOfLegs(_data);
     }
 }

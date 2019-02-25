@@ -6,11 +6,31 @@ namespace RealTime
 {
     class NonRealTimeService
     {
-        public int GetValue(string value)
+        public int NumberOfLegs(string animalsCommaSeparated)
         {
-            var index = value.IndexOf(';');
-            string substr = value.Substring(index);
-            return substr.Length;
+            int legs = 0;
+            var animals = animalsCommaSeparated.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            foreach (var animal in animals)
+            {
+                legs += GetNumberOfLegs(animal);
+            }
+            return legs;
+        }
+
+        private static int GetNumberOfLegs(string animal)
+        {
+            switch (animal)
+            {
+                case "dog":
+                case "cat":
+                    return 4;
+                case "spider":
+                    return 8;
+                case "bird":
+                    return 2;
+                default:
+                    throw new NotSupportedException($"Uknown animal {animal}");
+            }
         }
     }
 }
