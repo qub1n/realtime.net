@@ -4,12 +4,12 @@ using System.Text;
 
 namespace RealTime
 {
-    class NonRealTimeService
+    class LegServiceString
     {
         public int NumberOfLegs(string animalsCommaSeparated)
         {
             int legs = 0;
-            var animals = animalsCommaSeparated.Split(",", StringSplitOptions.RemoveEmptyEntries);
+            var animals = animalsCommaSeparated.Split(',', StringSplitOptions.RemoveEmptyEntries);
             foreach (var animal in animals)
             {
                 legs += GetNumberOfLegs(animal);

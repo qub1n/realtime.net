@@ -1,14 +1,14 @@
 ﻿using System;
 
 namespace RealTime
-{
-    public class RealTimeService
+{ 
+    public class LegServiceSpan
     {
         public delegate int LegCounter(ReadOnlySpan<char> animal);
 
         LegCounter _legCounter;
 
-        public RealTimeService()
+        public LegServiceSpan()
         {
             _legCounter = GetNumberOfLegs;
         }

@@ -11,8 +11,10 @@ namespace RealTime
     public class Benchmark
     {
 
-        private readonly RealTimeService realitme = new RealTimeService();
-        private readonly NonRealTimeService nonrealitme = new NonRealTimeService();
+        private readonly LegServiceSpan legServiceSpan = new LegServiceSpan();
+        private readonly LegServiceString nonrealitme = new LegServiceString();
+        private readonly LegServiceMemoryForEach memoryLegService = new LegServiceMemoryForEach();
+        private readonly LegServiceMemoryDelegate memoryLegService2 = new LegServiceMemoryDelegate();
 
         private readonly string _data;
 
@@ -22,9 +24,15 @@ namespace RealTime
         }
 
         [Benchmark]
-        public int Realitme() => realitme.NumberOfLegs(_data);
+        public int LegsSpan() => legServiceSpan.NumberOfLegs(_data);
 
         [Benchmark]
-        public int NonRealitme() => nonrealitme.NumberOfLegs(_data);
+        public int LegsString() => nonrealitme.NumberOfLegs(_data);
+
+        [Benchmark]
+        public int LegMemory() => memoryLegService.NumberOfLegs(_data);
+
+        [Benchmark]
+        public int LegMemory2() => memoryLegService2.NumberOfLegs(_data);
     }
 }
