@@ -13,8 +13,9 @@ namespace RealTime
 
         private readonly LegServiceSpan legServiceSpan = new LegServiceSpan();
         private readonly LegServiceString nonrealitme = new LegServiceString();
-        private readonly LegServiceMemoryForEach memoryLegService = new LegServiceMemoryForEach();
-        private readonly LegServiceMemoryDelegate memoryLegService2 = new LegServiceMemoryDelegate();
+        private readonly LegServiceMemoryForEach memoryLegServiceForEach = new LegServiceMemoryForEach();
+        private readonly LegServiceMemoryDelegate memoryLegServiceDelegate = new LegServiceMemoryDelegate();
+        private readonly LegServiceStringFast legServiceStringFast = new LegServiceStringFast();
 
         private readonly string _data;
 
@@ -26,13 +27,16 @@ namespace RealTime
         [Benchmark]
         public int LegsSpan() => legServiceSpan.NumberOfLegs(_data);
 
-        [Benchmark]
+        [Benchmark(Baseline = true)]
         public int LegsString() => nonrealitme.NumberOfLegs(_data);
 
         [Benchmark]
-        public int LegMemory() => memoryLegService.NumberOfLegs(_data);
+        public int LegMemory() => memoryLegServiceDelegate.NumberOfLegs(_data);
+
+        //[Benchmark]
+        public int LegMemoryForEach() => memoryLegServiceForEach.NumberOfLegs(_data);
 
         [Benchmark]
-        public int LegMemory2() => memoryLegService2.NumberOfLegs(_data);
+        public int LegsStringFast() => legServiceStringFast.NumberOfLegs(_data);
     }
 }
