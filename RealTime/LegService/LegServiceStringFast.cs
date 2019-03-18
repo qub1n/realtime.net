@@ -13,7 +13,7 @@ namespace RealTime
             return Split(animalsCommaSeparated, ',', GetNumberOfLegs);
         }
 
-        public static int Split(string s, char c, LegCounter visitor)
+        public static int Split(string s, char c, LegCounter legCounter)
         {
             int legs = 0;
             int start = 0;
@@ -24,7 +24,7 @@ namespace RealTime
                 if (pos > 0)
                 {
                     string animal = s.Substring(start, pos - start);
-                    legs += visitor(animal);
+                    legs += legCounter(animal);
                 }
                 else
                 {                    

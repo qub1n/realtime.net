@@ -8,7 +8,7 @@ namespace RealTime
     [HtmlExporter]
     [MemoryDiagnoser]
     //[AllStatisticsColumn]
-    public class Benchmark
+    public class BenchmarkParse
     {
 
         private readonly LegServiceSpan legServiceSpan = new LegServiceSpan();
@@ -19,8 +19,8 @@ namespace RealTime
 
         private readonly string _data;
 
-        public Benchmark()
-        {
+        public BenchmarkParse()
+        {        
             _data = string.Concat(Enumerable.Repeat("dog,cat,spider,cat,bird,", 1000));
         }
 
@@ -33,10 +33,10 @@ namespace RealTime
         [Benchmark]
         public int LegMemory() => memoryLegServiceDelegate.NumberOfLegs(_data);
 
-        //[Benchmark]
-        public int LegMemoryForEach() => memoryLegServiceForEach.NumberOfLegs(_data);
-
         [Benchmark]
         public int LegsStringFast() => legServiceStringFast.NumberOfLegs(_data);
+
+        //[Benchmark]
+        //public int LegMemoryForEach() => memoryLegServiceForEach.NumberOfLegs(_data);       
     }
 }

@@ -1,10 +1,8 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace RealTime
+namespace RealTime.Benchmark
 {
-    //[HtmlExporter]
     [MemoryDiagnoser]
-    //[AllStatisticsColumn]
     public class BenchmarkDelegate
     {
         public delegate int GetInteger();
