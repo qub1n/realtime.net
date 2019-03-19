@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace RealTime.Benchmark
 {
+    [HtmlExporter]
     [MemoryDiagnoser]
     public class BenchmarkComplete
     {

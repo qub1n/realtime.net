@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace RealTime.Benchmark
 {
+    [HtmlExporter]
     [MemoryDiagnoser]
     public class BenchmarkRead
     {
@@ -19,7 +20,7 @@ namespace RealTime.Benchmark
             File.WriteAllText(TestFile, content);
         }
 
-        //[Benchmark]
+        [Benchmark]
         public void ReadFileOnPool() => ReadFileOnPool(TestFile);
 
         [Benchmark]

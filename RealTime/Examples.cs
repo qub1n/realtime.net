@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Buffers;
+using System.Linq;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -33,18 +33,28 @@ namespace RealTime
             ReadOnlyMemory<char> spider = memory.Slice(8, 6);
         }
 
-        
+        public static int GetNumberOfLegsInFile(string path)
+        {
+            string content = File.ReadAllText(path);
+            var animals = content.Split(',', StringSplitOptions.RemoveEmptyEntries);
+            return animals.Sum(animal => GetNumberOfLegs(animal));
+        }
 
+        private static int GetNumberOfLegs(string animal)
+        {
+            switch (animal)
+            {
+                case "dog":
+                case "cat":
+                    return 4;
+                case "spider":
+                    return 8;
+                case "bird":
+                    return 2;
+                default:
+                    throw new NotSupportedException($"Uknown animal {animal}");
+            }
+        }
 
-       
-
-        //using (var stream = File.OpenRead("c:\small.file"))
-        //{
-        //    Span<char> span = stackalloc char[50];
-        //    Memory<char> memory = new Memory<char>(span);
-        //    StreamReader reader = new StreamReader(stream);
-        //    var readTask = reader.ReadAsync(memory);
-        //    Parse(readTask.AsTask(), memory);
-        //}
     }
 }

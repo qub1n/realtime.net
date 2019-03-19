@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace RealTime
 {
@@ -8,13 +7,8 @@ namespace RealTime
     {
         public int NumberOfLegs(string animalsCommaSeparated)
         {
-            int legs = 0;
             var animals = animalsCommaSeparated.Split(',', StringSplitOptions.RemoveEmptyEntries);
-            foreach (var animal in animals)
-            {
-                legs += GetNumberOfLegs(animal);
-            }
-            return legs;
+            return animals.Sum(animal => GetNumberOfLegs(animal));
         }
 
         private static int GetNumberOfLegs(string animal)
