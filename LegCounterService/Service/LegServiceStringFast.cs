@@ -1,10 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace RealTime
+namespace LegCounterService.Service
 {
-    class LegServiceStringFast
+    public class LegServiceStringFast
     {
         public delegate int LegCounter(string animal);
 
@@ -48,7 +46,7 @@ namespace RealTime
                 case "bird":
                     return 2;
                 default:
-                    throw new NotSupportedException($"Uknown animal {animal}");
+                    throw new NotSupportedException($"Unknown animal {animal}");
             }
         }
     }

@@ -1,6 +1,6 @@
 ﻿using BenchmarkDotNet.Attributes;
 
-namespace RealTime.Benchmark
+namespace Veeam.Meetup.Benchmark
 {
     [MemoryDiagnoser]
     public class BenchmarkDelegate

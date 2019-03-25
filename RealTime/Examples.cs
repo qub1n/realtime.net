@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.IO;
-using System.Threading.Tasks;
 
 namespace RealTime
 {
@@ -55,6 +54,5 @@ namespace RealTime
                     throw new NotSupportedException($"Uknown animal {animal}");
             }
         }
-
     }
 }

@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace RealTime
+namespace LegCounterService.Service
 {
     public class LegServiceMemoryForEach
     {
@@ -55,7 +54,7 @@ namespace RealTime
                     return 2;
             }
 
-            throw new NotSupportedException();//$"Uknown animal {animal.ToString()}"
+            throw new NotSupportedException();//$"Unknown animal {animal.ToString()}"
         }
     }
 }

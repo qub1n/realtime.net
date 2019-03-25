@@ -3,8 +3,9 @@ using System;
 using System.Buffers;
 using System.IO;
 using System.Linq;
+using LegCounterService.Service;
 
-namespace RealTime.Benchmark
+namespace Veeam.Meetup.Benchmark
 {
     [HtmlExporter]
     [MemoryDiagnoser]
@@ -31,28 +32,28 @@ namespace RealTime.Benchmark
         [Benchmark]
         public void ParseFileOnStack() => ParseFileOnStack(TestFile);
 
-        public void ParseFileOnHeap(string filename)
+        public int ParseFileOnHeap(string filename)
         {
             string animals = File.ReadAllText(filename);           
-            int legs = _legServiceStringFast.NumberOfLegs(animals);
+            return _legServiceStringFast.NumberOfLegs(animals);
         }
 
-        public void ParseFileOnStack(string filename)
+        public int ParseFileOnStack(string filename)
         {
             Span<char> buffer = stackalloc char[1024 * 200]; // 200KB is might be OK on stack
             using (var stream = File.OpenRead(filename))
             {
-                StreamReader reader = new StreamReader(stream);
+                StreamReader reader = new StreamReader(stream); //UTF8
                 int count = reader.ReadBlock(buffer);
                 if (count == buffer.Length)
                     throw new Exception($"Buffer size {buffer.Length} too small, use array pooling.");
                 buffer = buffer.Slice(0, count);
 
-                int legs = _legServiceSpan.NumberOfLegs(buffer);
+                return _legServiceSpan.NumberOfLegs(buffer);
             }
         }
 
-        public void ParseFileOnPool(string filename)
+        public int ParseFileOnPool(string filename)
         {
             ArrayPool<char> pool = ArrayPool<char>.Shared;
             using (var stream = File.OpenRead(filename))
@@ -69,7 +70,7 @@ namespace RealTime.Benchmark
 
                     Span<char> span = new Span<char>(buffer).Slice(0, count);
 
-                    int legs = _legServiceSpan.NumberOfLegs(span);
+                    return _legServiceSpan.NumberOfLegs(span);
                 }
                 finally
                 {

@@ -1,16 +1,15 @@
 ﻿using BenchmarkDotNet.Running;
-using RealTime.Benchmark;
-using System;
+using Veeam.Meetup.Benchmark;
 
-namespace RealTime
+namespace Veeam.Meetup
 {
     class Program
     {
         static void Main(string[] args)
-        {          
-            BenchmarkRunner.Run<BenchmarkComplete>();
+        {                      
             BenchmarkRunner.Run<BenchmarkRead>();
             BenchmarkRunner.Run<BenchmarkParse>();
+            BenchmarkRunner.Run<BenchmarkComplete>();
         }
     }
 }

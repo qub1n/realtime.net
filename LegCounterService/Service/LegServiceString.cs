@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 
-namespace RealTime
+namespace LegCounterService.Service
 {
-    class LegServiceString
+    public class LegServiceString
     {
         public int NumberOfLegs(string animalsCommaSeparated)
         {
@@ -23,7 +23,7 @@ namespace RealTime
                 case "bird":
                     return 2;
                 default:
-                    throw new NotSupportedException($"Uknown animal {animal}");
+                    throw new NotSupportedException($"Unknown animal {animal}");
             }
         }
     }

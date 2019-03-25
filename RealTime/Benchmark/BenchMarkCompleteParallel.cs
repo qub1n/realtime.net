@@ -2,7 +2,7 @@
 using System;
 using System.Threading.Tasks;
 
-namespace RealTime.Benchmark
+namespace Veeam.Meetup.Benchmark
 {
     [HtmlExporter]
     [MemoryDiagnoser]

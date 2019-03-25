@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace RealTime
-{ 
+namespace LegCounterService.Service
+{
     public class LegServiceSpan
-    {        
+    {
         public delegate int LegCounter(ReadOnlySpan<char> animal);
 
-        LegCounter _legCounter;
+        readonly LegCounter _legCounter;
 
         public LegServiceSpan()
         {
@@ -23,13 +23,12 @@ namespace RealTime
             return Split(animalsCommaSeparated, ',', _legCounter);
         }
 
-        public static int Split(ReadOnlySpan<char> span, char c, LegCounter legCounter)
+        public static int Split(ReadOnlySpan<char> span, char separator, LegCounter legCounter)
         {
             int legs = 0;
-
             while (span.Length > 0)
             {
-                int pos = span.IndexOf(c);
+                int pos = span.IndexOf(separator);
                 if (pos > 0)
                 {
                     ReadOnlySpan<char> animal = span.Slice(0, pos);
@@ -58,8 +57,8 @@ namespace RealTime
                 case var bird when bird.SequenceEqual("bird".AsSpan()):
                     return 2;
                 default:
-                    throw new NotSupportedException($"Uknown animal {animal.ToString()}");
-            }            
+                    throw new NotSupportedException($"Unknown animal {animal.ToString()}");
+            }
         }
     }
 }

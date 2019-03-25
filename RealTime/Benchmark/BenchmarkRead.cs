@@ -4,7 +4,7 @@ using System.Buffers;
 using System.IO;
 using System.Linq;
 
-namespace RealTime.Benchmark
+namespace Veeam.Meetup.Benchmark
 {
     [HtmlExporter]
     [MemoryDiagnoser]

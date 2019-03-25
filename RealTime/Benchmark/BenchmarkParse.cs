@@ -1,40 +1,40 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
-using System.Security.Cryptography;
+﻿using BenchmarkDotNet.Attributes;
 using System.Linq;
+using LegCounterService.Service;
 
-namespace RealTime
+namespace Veeam.Meetup.Benchmark
 {
     [HtmlExporter]
     [MemoryDiagnoser]
-    //[AllStatisticsColumn]
     public class BenchmarkParse
     {
+        #region services
 
-        private readonly LegServiceSpan legServiceSpan = new LegServiceSpan();
-        private readonly LegServiceString nonrealitme = new LegServiceString();
-        private readonly LegServiceMemoryForEach memoryLegServiceForEach = new LegServiceMemoryForEach();
-        private readonly LegServiceMemoryDelegate memoryLegServiceDelegate = new LegServiceMemoryDelegate();
-        private readonly LegServiceStringFast legServiceStringFast = new LegServiceStringFast();
+        private readonly LegServiceSpan _legServiceSpan = new LegServiceSpan();
+        private readonly LegServiceString _legServiceString = new LegServiceString();
+        private readonly LegServiceMemoryForEach _memoryLegServiceForEach = new LegServiceMemoryForEach();
+        private readonly LegServiceMemoryDelegate _memoryLegServiceDelegate = new LegServiceMemoryDelegate();
+        private readonly LegServiceStringFast _legServiceStringFast = new LegServiceStringFast();
 
+        #endregion region
         private readonly string _data;
-
         public BenchmarkParse()
-        {        
+        {
             _data = string.Concat(Enumerable.Repeat("dog,cat,spider,cat,bird,", 1000));
         }
 
-        [Benchmark]
-        public int LegsSpan() => legServiceSpan.NumberOfLegs(_data);
-
         [Benchmark(Baseline = true)]
-        public int LegsString() => nonrealitme.NumberOfLegs(_data);
+        public int LegsString() => _legServiceString.NumberOfLegs(_data);
 
         [Benchmark]
-        public int LegMemory() => memoryLegServiceDelegate.NumberOfLegs(_data);
+        public int LegsSpan() => _legServiceSpan.NumberOfLegs(_data);
 
         [Benchmark]
-        public int LegsStringFast() => legServiceStringFast.NumberOfLegs(_data);
+        public int LegsStringFast() => _legServiceStringFast.NumberOfLegs(_data);
+
+
+        //[Benchmark]
+        public int LegMemory() => _memoryLegServiceDelegate.NumberOfLegs(_data);
 
         //[Benchmark]
         //public int LegMemoryForEach() => memoryLegServiceForEach.NumberOfLegs(_data);       
